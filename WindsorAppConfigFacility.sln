@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindsorAppConfigFacility", "WindsorAppConfigFacility\WindsorAppConfigFacility.csproj", "{1CC93527-8398-4D7B-97C3-BF9E2B3E8CF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5259C438-7BDE-4B5E-A413-08988C41F3CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindsorAppConfigFacilityTests", "Tests\WindsorAppConfigFacilityTests\WindsorAppConfigFacilityTests.csproj", "{A31D86D4-ACE1-446D-9247-F6F4B9001863}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CC93527-8398-4D7B-97C3-BF9E2B3E8CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CC93527-8398-4D7B-97C3-BF9E2B3E8CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CC93527-8398-4D7B-97C3-BF9E2B3E8CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CC93527-8398-4D7B-97C3-BF9E2B3E8CF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A31D86D4-ACE1-446D-9247-F6F4B9001863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A31D86D4-ACE1-446D-9247-F6F4B9001863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A31D86D4-ACE1-446D-9247-F6F4B9001863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A31D86D4-ACE1-446D-9247-F6F4B9001863}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A31D86D4-ACE1-446D-9247-F6F4B9001863} = {5259C438-7BDE-4B5E-A413-08988C41F3CC}
+	EndGlobalSection
+EndGlobal
