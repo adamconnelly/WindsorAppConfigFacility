@@ -7,7 +7,9 @@
     {
         protected override void Init()
         {
-            Kernel.Register(Component.For<AppConfigInterceptor>().LifestyleTransient());
+            Kernel.Register(
+                Component.For<ISettingsProvider>().ImplementedBy<AppSettingsProvider>(),
+                Component.For<AppConfigInterceptor>().LifestyleTransient());
         }
     }
 }

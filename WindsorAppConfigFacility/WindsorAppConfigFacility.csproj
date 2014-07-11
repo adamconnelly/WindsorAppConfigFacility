@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfigInterceptor.cs" />
+    <Compile Include="AppSettingsProvider.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="ISettingsProvider.cs" />
     <Compile Include="WindsorAppConfigFacility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
