@@ -6,10 +6,12 @@
     public class AppConfigInterceptor : IInterceptor
     {
         private readonly ISettingsProvider _settingsProvider;
+        private readonly ISettingsCache _settingsCache;
 
-        public AppConfigInterceptor(ISettingsProvider settingsProvider)
+        public AppConfigInterceptor(ISettingsProvider settingsProvider, ISettingsCache settingsCache)
         {
             _settingsProvider = settingsProvider;
+            _settingsCache = settingsCache;
         }
 
         public void Intercept(IInvocation invocation)
@@ -21,7 +23,15 @@
 
             var propertyName = invocation.Method.Name.Substring(4);
 
-            invocation.ReturnValue = _settingsProvider.GetSetting(propertyName, invocation.Method.ReturnType);
+            object value;
+
+            if (!_settingsCache.TryGetValue(propertyName, out value))
+            {
+                value = _settingsProvider.GetSetting(propertyName, invocation.Method.ReturnType);
+                _settingsCache.Put(propertyName, value);
+            }
+
+            invocation.ReturnValue = value;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace WindsorAppConfigFacility
 {
-    using Castle.Core;
     using Castle.MicroKernel.Registration;
 
     public static class Extensions

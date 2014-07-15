@@ -10,6 +10,8 @@
     [TestFixture]
     public class AppConfigFacilityTests
     {
+        private WindsorContainer _container;
+
         [Test]
         public void CanRetrieveStringPropertyFromConfig()
         {
@@ -67,7 +69,6 @@
         [Test]
         public void CanRetrieveUrlPropertyFromConfig()
         {
-
             // Arrange
             var config = CreateConfig();
 
@@ -79,18 +80,46 @@
             Assert.AreEqual(expected, result);
         }
 
-        private ITestConfig CreateConfig()
+        [Test]
+        public void RegistersDefaultSettingsCacheByDefault()
         {
+            // Arrange
+            CreateConfig();
+
+            // Act
+            var cache = _container.Resolve<ISettingsCache>();
+
+            // Assert
+            Assert.IsInstanceOf<DefaultSettingsCache>(cache);
+        }
+
+        [Test]
+        public void CanConfigureCaching()
+        {
+            // Arrange
             var container = new WindsorContainer();
 
-            container.AddFacility<AppConfigFacility>();
+            container.AddFacility<AppConfigFacility>(f => f.CacheSettings());
 
-            container.Register(Component.For<ITestConfig>().FromAppConfig(
+            // Act
+            var cache = container.Resolve<ISettingsCache>();
+
+            // Assert
+            Assert.IsInstanceOf<MemorySettingsCache>(cache);
+        }
+
+        private ITestConfig CreateConfig()
+        {
+            _container = new WindsorContainer();
+
+            _container.AddFacility<AppConfigFacility>();
+
+            _container.Register(Component.For<ITestConfig>().FromAppConfig(
                 // TODO: Something like the following for creating computed settings
                 //c => c.Configure(t => t.ComputedSetting).ComputedBy(t => t.StringSetting + " " + t.IntSetting)
                 ));
 
-            return container.Resolve<ITestConfig>();
+            return _container.Resolve<ITestConfig>();
         }
     }
 }

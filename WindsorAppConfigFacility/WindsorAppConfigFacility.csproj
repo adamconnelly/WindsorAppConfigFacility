@@ -48,9 +48,12 @@
   <ItemGroup>
     <Compile Include="AppConfigInterceptor.cs" />
     <Compile Include="AppSettingsProvider.cs" />
+    <Compile Include="DefaultSettingsCache.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="ISettingsCache.cs" />
     <Compile Include="ISettingsProvider.cs" />
-    <Compile Include="WindsorAppConfigFacility.cs" />
+    <Compile Include="AppConfigFacility.cs" />
+    <Compile Include="MemorySettingsCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
