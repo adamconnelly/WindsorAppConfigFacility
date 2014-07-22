@@ -48,8 +48,10 @@
   <ItemGroup>
     <Compile Include="AppConfigInterceptor.cs" />
     <Compile Include="AppSettingsProvider.cs" />
+    <Compile Include="ConfigConfiguration.cs" />
     <Compile Include="DefaultSettingsCache.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="IConfigConfiguration.cs" />
     <Compile Include="ISettingsCache.cs" />
     <Compile Include="ISettingsProvider.cs" />
     <Compile Include="AppConfigFacility.cs" />
