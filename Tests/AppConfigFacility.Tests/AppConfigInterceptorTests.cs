@@ -19,7 +19,10 @@
 
             _settingsProvider.Setup(p => p.GetSetting("Name", typeof (string))).Returns("My Name");
             var invocation =
-                Mock.Of<IInvocation>(i => i.Method.ReturnType == typeof (string) && i.Method.Name == "get_Name");
+                Mock.Of<IInvocation>(
+                    i =>
+                        i.Method.DeclaringType == typeof (AppConfigInterceptorTests) && i.Method.ReturnType == typeof (string) &&
+                        i.Method.Name == "get_Name");
 
             // Act
             interceptor.Intercept(invocation);
@@ -51,9 +54,9 @@
             object expectedName = "Test Name";
             var interceptor = CreateInterceptor();
 
-            var invocation = Mock.Of<IInvocation>(i => i.Method.Name == "get_Name");
+            var invocation = Mock.Of<IInvocation>(i => i.Method.Name == "get_Name" && i.Method.DeclaringType == typeof(AppConfigInterceptorTests));
 
-            _settingsCache.Setup(c => c.TryGetValue("Name", out expectedName)).Returns(true);
+            _settingsCache.Setup(c => c.TryGetValue(typeof(AppConfigInterceptorTests).FullName + ".Name", out expectedName)).Returns(true);
 
             // Act
             interceptor.Intercept(invocation);
@@ -71,13 +74,16 @@
 
             _settingsProvider.Setup(p => p.GetSetting("Name", typeof(string))).Returns(expectedValue);
             var invocation =
-                Mock.Of<IInvocation>(i => i.Method.ReturnType == typeof(string) && i.Method.Name == "get_Name");
+                Mock.Of<IInvocation>(
+                    i =>
+                        i.Method.ReturnType == typeof (string) && i.Method.Name == "get_Name" &&
+                        i.Method.DeclaringType == typeof(AppConfigInterceptorTests));
 
             // Act
             interceptor.Intercept(invocation);
 
             // Assert
-            _settingsCache.Verify(c => c.Put("Name", expectedValue));
+            _settingsCache.Verify(c => c.Put(typeof (AppConfigInterceptorTests).FullName + ".Name", expectedValue));
         }
 
         private AppConfigInterceptor CreateInterceptor()

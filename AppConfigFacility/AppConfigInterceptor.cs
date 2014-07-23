@@ -34,16 +34,20 @@
 
             object value;
 
-            if (!_settingsCache.TryGetValue(propertyName, out value))
+            var cacheKey = GetCacheKey(propertyName, invocation.Method.DeclaringType);
+            if (!_settingsCache.TryGetValue(cacheKey, out value))
             {
                 value = GetValue(invocation, propertyName);
 
-                // TODO: I think we should include the type name in the name of the setting in case
-                // we have multiple settings interfaces with overlapping names
-                _settingsCache.Put(propertyName, value);
+                _settingsCache.Put(cacheKey, value);
             }
 
             invocation.ReturnValue = value;
+        }
+
+        private static string GetCacheKey(string propertyName, Type targetType)
+        {
+            return targetType.FullName + "." + propertyName;
         }
 
         private object GetValue(IInvocation invocation, string propertyName)
