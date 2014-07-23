@@ -1,4 +1,4 @@
-﻿namespace WindsorAppConfigFacility
+﻿namespace AppConfigFacility
 {
     /// <summary>
     /// A default implementation of <see cref="ISettingsCache"/> that does nothing.

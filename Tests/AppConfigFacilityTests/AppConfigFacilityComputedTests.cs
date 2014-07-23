@@ -1,13 +1,12 @@
-﻿namespace WindsorAppConfigFacilityTests
+﻿namespace AppConfigFacility.Tests
 {
     using System.Configuration;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
     using NUnit.Framework;
-    using WindsorAppConfigFacility;
 
     [TestFixture]
-    public class WindsorAppConfigFacilityComputedTests
+    public class AppConfigFacilityComputedTests
     {
         [Test]
         public void Computed()

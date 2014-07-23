@@ -1,10 +1,9 @@
-﻿namespace WindsorAppConfigFacilityTests
+﻿namespace AppConfigFacility.Tests
 {
     using System;
     using Castle.DynamicProxy;
     using Moq;
     using NUnit.Framework;
-    using WindsorAppConfigFacility;
 
     [TestFixture]
     public class AppConfigInterceptorTests

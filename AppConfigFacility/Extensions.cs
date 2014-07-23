@@ -1,4 +1,4 @@
-﻿namespace WindsorAppConfigFacility
+﻿namespace AppConfigFacility
 {
     using System;
     using Castle.MicroKernel.Registration;

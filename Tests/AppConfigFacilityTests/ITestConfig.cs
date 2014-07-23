@@ -1,4 +1,4 @@
-﻿namespace WindsorAppConfigFacilityTests
+﻿namespace AppConfigFacility.Tests
 {
     using System;
 

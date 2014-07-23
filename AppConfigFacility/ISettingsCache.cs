@@ -1,4 +1,4 @@
-﻿namespace WindsorAppConfigFacility
+﻿namespace AppConfigFacility
 {
     /// <summary>
     /// Caches settings.
