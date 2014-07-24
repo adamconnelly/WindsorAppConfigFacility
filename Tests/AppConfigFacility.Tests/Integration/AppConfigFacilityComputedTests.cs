@@ -1,4 +1,4 @@
-﻿namespace AppConfigFacility.Tests
+﻿namespace AppConfigFacility.Tests.Integration
 {
     using System.Configuration;
     using Castle.MicroKernel.Registration;

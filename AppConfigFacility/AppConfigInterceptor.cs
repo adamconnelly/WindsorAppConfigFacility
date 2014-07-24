@@ -12,6 +12,8 @@
         public static readonly string ComputedPropertiesKey = typeof (AppConfigInterceptor).FullName +
                                                               ".ComputedProperties";
 
+        public static readonly string PrefixKey = typeof (AppConfigInterceptor).FullName + "Prefix";
+
         private readonly ISettingsProvider _settingsProvider;
         private readonly ISettingsCache _settingsCache;
 
@@ -22,6 +24,8 @@
             _settingsProvider = settingsProvider;
             _settingsCache = settingsCache;
         }
+
+        public string Prefix { get; private set; }
 
         public void Intercept(IInvocation invocation)
         {
@@ -45,6 +49,12 @@
             invocation.ReturnValue = value;
         }
 
+        public void SetInterceptedComponentModel(ComponentModel target)
+        {
+            CreatePropertyAccessDictionary(target);
+            Prefix = (string)target.ExtendedProperties[PrefixKey];
+        }
+
         private static string GetCacheKey(string propertyName, Type targetType)
         {
             return targetType.FullName + "." + propertyName;
@@ -60,16 +70,16 @@
             }
 
             return accessFunc == null
-                ? _settingsProvider.GetSetting(propertyName, invocation.Method.ReturnType)
+                ? _settingsProvider.GetSetting(Prefix + propertyName, invocation.Method.ReturnType)
                 : accessFunc(invocation.Proxy);
         }
 
-        public void SetInterceptedComponentModel(ComponentModel target)
+        private void CreatePropertyAccessDictionary(ComponentModel target)
         {
             var accessDictionary = target.ExtendedProperties[ComputedPropertiesKey];
             if (accessDictionary != null)
             {
-                _propertyAccessDictionary = (IDictionary)accessDictionary;
+                _propertyAccessDictionary = (IDictionary) accessDictionary;
             }
             else
             {

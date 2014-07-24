@@ -18,6 +18,7 @@
 
                 registration.ExtendedProperties(new Property(AppConfigInterceptor.ComputedPropertiesKey,
                     configuration.ComputedDictionary));
+                registration.ExtendedProperties(new Property(AppConfigInterceptor.PrefixKey, configuration.Prefix));
             }
 
             return registration;

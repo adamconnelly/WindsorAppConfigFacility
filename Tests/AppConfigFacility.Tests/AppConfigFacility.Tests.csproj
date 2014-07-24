@@ -54,12 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppConfigInterceptorTests.cs" />
+    <Compile Include="Integration\AppConfigFacilityPrefixTests.cs" />
+    <Compile Include="Unit\AppConfigInterceptorTests.cs" />
+    <Compile Include="ISearchConfig.cs" />
     <Compile Include="ITestConfig.cs" />
-    <Compile Include="AppConfigFacilityTests.cs" />
+    <Compile Include="Integration\AppConfigFacilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnum.cs" />
-    <Compile Include="AppConfigFacilityComputedTests.cs" />
+    <Compile Include="Integration\AppConfigFacilityComputedTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

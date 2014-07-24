@@ -1,6 +1,8 @@
-﻿namespace AppConfigFacility.Tests
+﻿namespace AppConfigFacility.Tests.Unit
 {
     using System;
+    using System.Collections.Generic;
+    using Castle.Core;
     using Castle.DynamicProxy;
     using Moq;
     using NUnit.Framework;
@@ -22,6 +24,31 @@
                 Mock.Of<IInvocation>(
                     i =>
                         i.Method.DeclaringType == typeof (AppConfigInterceptorTests) && i.Method.ReturnType == typeof (string) &&
+                        i.Method.Name == "get_Name");
+
+            // Act
+            interceptor.Intercept(invocation);
+
+            // Assert
+            Assert.AreEqual("My Name", invocation.ReturnValue);
+        }
+
+        [Test]
+        public void Intercept_AppendsPrefixIfSpecified()
+        {
+            // Arrange
+            var interceptor = CreateInterceptor();
+
+            interceptor.SetInterceptedComponentModel(
+                new ComponentModel(new ComponentName("AppConfigInterceptorTests", false),
+                    new List<Type> {typeof (AppConfigInterceptorTests)}, typeof (AppConfigInterceptorTests),
+                    new Dictionary<string, object> {{AppConfigInterceptor.PrefixKey, "SomePrefix:"}}));
+
+            _settingsProvider.Setup(p => p.GetSetting("SomePrefix:Name", typeof(string))).Returns("My Name");
+            var invocation =
+                Mock.Of<IInvocation>(
+                    i =>
+                        i.Method.DeclaringType == typeof(AppConfigInterceptorTests) && i.Method.ReturnType == typeof(string) &&
                         i.Method.Name == "get_Name");
 
             // Act

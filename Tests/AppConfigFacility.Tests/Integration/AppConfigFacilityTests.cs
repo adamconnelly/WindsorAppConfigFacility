@@ -1,4 +1,4 @@
-﻿namespace AppConfigFacility.Tests
+﻿namespace AppConfigFacility.Tests.Integration
 {
     using System;
     using System.Configuration;
