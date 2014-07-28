@@ -57,11 +57,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppConfigFacility.Azure\AppConfigFacility.Azure.csproj">
+    <ProjectReference Include="..\..\AppConfigFacility.Azure\AppConfigFacility.Azure.csproj">
       <Project>{6c9e7f47-7928-4187-9bd0-acde23fc0312}</Project>
       <Name>AppConfigFacility.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AppConfigFacility\AppConfigFacility.csproj">
+    <ProjectReference Include="..\..\AppConfigFacility\AppConfigFacility.csproj">
       <Project>{1cc93527-8398-4d7b-97c3-bf9e2b3e8cf9}</Project>
       <Name>AppConfigFacility</Name>
     </ProjectReference>

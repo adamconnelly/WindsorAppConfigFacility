@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{44B166
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppConfigFacility.Tests", "Tests\AppConfigFacility.Tests\AppConfigFacility.Tests.csproj", "{A31D86D4-ACE1-446D-9247-F6F4B9001863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppConfigFacility.Azure.Tests", "AppConfigFacility.Azure.Tests\AppConfigFacility.Azure.Tests.csproj", "{47D042D3-D6DF-4B3D-9240-AC57CBC73BCC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppConfigFacility.Azure.Tests", "Tests\AppConfigFacility.Azure.Tests\AppConfigFacility.Azure.Tests.csproj", "{47D042D3-D6DF-4B3D-9240-AC57CBC73BCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
