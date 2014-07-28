@@ -20,9 +20,10 @@
         /// <summary>
         /// Enables caching of settings. This prevents multiple calls being made to the settings provider.
         /// </summary>
-        public void CacheSettings()
+        public AppConfigFacility CacheSettings()
         {
             _cacheType = typeof (MemorySettingsCache);
+            return this;
         }
 
         /// <summary>
@@ -31,9 +32,10 @@
         /// <typeparam name="T">
         /// The type of the settings provider.
         /// </typeparam>
-        public void UseSettingsProvider<T>() where T : ISettingsProvider
+        public AppConfigFacility UseSettingsProvider<T>() where T : ISettingsProvider
         {
             _settingsProviderType = typeof (T);
+            return this;
         }
     }
 }
