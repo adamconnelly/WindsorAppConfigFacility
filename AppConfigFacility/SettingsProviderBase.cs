@@ -7,6 +7,14 @@ namespace AppConfigFacility
     /// </summary>
     public abstract class SettingsProviderBase : ISettingsProvider
     {
+        /// <summary>
+        /// Gets the specified setting.
+        /// </summary>
+        /// <param name="key">The setting key.</param>
+        /// <param name="returnType">The type of the setting.</param>
+        /// <returns>
+        /// The setting.
+        /// </returns>
         public object GetSetting(string key, Type returnType)
         {
             var value = GetSetting(key);

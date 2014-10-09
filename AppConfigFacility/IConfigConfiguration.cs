@@ -3,6 +3,10 @@
     using System;
     using System.Linq.Expressions;
 
+    /// <summary>
+    /// Used to configure an auto-implemented config interface.
+    /// </summary>
+    /// <typeparam name="T">The type of the interface.</typeparam>
     public interface IConfigConfiguration<T>
     {
         /// <summary>

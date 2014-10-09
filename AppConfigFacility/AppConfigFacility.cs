@@ -4,11 +4,21 @@
     using Castle.MicroKernel.Facilities;
     using Castle.MicroKernel.Registration;
 
+    /// <summary>
+    /// A facility that allows you to create automatically implemented settings interfaces to
+    /// access your application settings.
+    /// </summary>
     public class AppConfigFacility : AbstractFacility
     {
         private Type _cacheType = typeof (DefaultSettingsCache);
         private Type _settingsProviderType = typeof (AppSettingsProvider);
 
+        /// <summary>
+        /// The custom initialization for the Facility.
+        /// </summary>
+        /// <remarks>
+        /// It must be overridden.
+        /// </remarks>
         protected override void Init()
         {
             Kernel.Register(

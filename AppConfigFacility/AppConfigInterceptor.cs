@@ -7,26 +7,43 @@
     using Castle.Core.Interceptor;
     using Castle.DynamicProxy;
 
+    /// <summary>
+    /// Intercepts calls to a settings interface to provide the values from the config.
+    /// </summary>
     public class AppConfigInterceptor : IInterceptor, IOnBehalfAware
     {
+        /// <summary>
+        /// The key that should be used to store the computed properties.
+        /// </summary>
         public static readonly string ComputedPropertiesKey = typeof (AppConfigInterceptor).FullName +
                                                               ".ComputedProperties";
 
+        /// <summary>
+        /// The key that should be used to store the settings prefix.
+        /// </summary>
         public static readonly string PrefixKey = typeof (AppConfigInterceptor).FullName + "Prefix";
 
         private readonly ISettingsProvider _settingsProvider;
         private readonly ISettingsCache _settingsCache;
 
         private IDictionary _propertyAccessDictionary;
+        private string _prefix;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AppConfigInterceptor"/> type.
+        /// </summary>
+        /// <param name="settingsProvider">The settings provider.</param>
+        /// <param name="settingsCache">The settings cache.</param>
         public AppConfigInterceptor(ISettingsProvider settingsProvider, ISettingsCache settingsCache)
         {
             _settingsProvider = settingsProvider;
             _settingsCache = settingsCache;
         }
 
-        public string Prefix { get; private set; }
-
+        /// <summary>
+        /// Intercepts the invocation.
+        /// </summary>
+        /// <param name="invocation">The invocation.</param>
         public void Intercept(IInvocation invocation)
         {
             if (!invocation.Method.Name.StartsWith("get_"))
@@ -49,10 +66,14 @@
             invocation.ReturnValue = value;
         }
 
+        /// <summary>
+        /// Used to get some extra information about the component being intercepted.
+        /// </summary>
+        /// <param name="target">The component being intercepted.</param>
         public void SetInterceptedComponentModel(ComponentModel target)
         {
             CreatePropertyAccessDictionary(target);
-            Prefix = (string)target.ExtendedProperties[PrefixKey];
+            _prefix = (string)target.ExtendedProperties[PrefixKey];
         }
 
         private static string GetCacheKey(string propertyName, Type targetType)
@@ -70,7 +91,7 @@
             }
 
             return accessFunc == null
-                ? _settingsProvider.GetSetting(Prefix + propertyName, invocation.Method.ReturnType)
+                ? _settingsProvider.GetSetting(_prefix + propertyName, invocation.Method.ReturnType)
                 : accessFunc(invocation.Proxy);
         }
 
