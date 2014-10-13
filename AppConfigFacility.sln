@@ -18,6 +18,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppConfigFacility.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppConfigFacility.Azure.Tests", "Tests\AppConfigFacility.Azure.Tests\AppConfigFacility.Azure.Tests.csproj", "{47D042D3-D6DF-4B3D-9240-AC57CBC73BCC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{31E7CEB0-C120-415E-AB4C-A908C64814EB}"
+	ProjectSection(SolutionItems) = preProject
+		build.proj = build.proj
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
