@@ -6,7 +6,7 @@
     <NUnitToolPath>$(MSBuildProjectDirectory)\packages\NUnit.Runners.2.6.3\tools</NUnitToolPath>
   </PropertyGroup>
   
-  <Import Project="$(MSBuildProjectDirectory)\.build\MSBuild.Community.Tasks.targets"/>
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
   
   <Target Name="CI" DependsOnTargets="Build;RunTests" />
  
