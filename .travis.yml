@@ -8,4 +8,3 @@ install:
  
 script:
   - xbuild build.proj
-  - nunit-console ./Tests/AppConfigFacility.Tests/bin/Release/AppConfigFacility.Tests.dll ./Tests/AppConfigFacility.Azure.Tests/bin/Release/AppConfigFacility.Azure.Tests.dll
