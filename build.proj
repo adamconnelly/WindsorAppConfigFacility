@@ -3,7 +3,14 @@
 
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\.build</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
     <NUnitToolPath>$(MSBuildProjectDirectory)\packages\NUnit.Runners.2.6.3\tools</NUnitToolPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(OS)' != 'Windows_NT'">
+    <NUnitToolPath>/usr/bin</NUnitToolPath>
   </PropertyGroup>
   
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
