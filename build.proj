@@ -17,7 +17,7 @@
   
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
   
-  <Target Name="CI" DependsOnTargets="Build;RunTests" />
+  <Target Name="CI" DependsOnTargets="GenerateAssemblyInfo;Build;RunTests" />
 
   <Target Name="GenerateAssemblyInfo">
   	<AssemblyInfo CodeLanguage="CS"

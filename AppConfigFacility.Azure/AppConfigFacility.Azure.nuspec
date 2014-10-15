@@ -12,12 +12,13 @@
 		<dependencies>
 			<dependency id="Castle.Core" version="3.3.0" />
   			<dependency id="Castle.Windsor" version="3.3.0" />
+  			<dependency id="Microsoft.WindowsAzure.ConfigurationManager" version="2.0.3" />
 		</dependencies>
 	</metadata>
 
 	<files>
-		<file src="bin\Release\AppConfigFacility.dll" target="lib" />
-		<file src="bin\Release\AppConfigFacility.pdb" target="lib" />
-		<file src="bin\Release\AppConfigFacility.xml" target="lib" />
+		<file src="bin\Release\AppConfigFacility.Azure.dll" target="lib" />
+		<file src="bin\Release\AppConfigFacility.Azure.pdb" target="lib" />
+		<file src="bin\Release\AppConfigFacility.Azure.xml" target="lib" />
 	</files>
 </package>
