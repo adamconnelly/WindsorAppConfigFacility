@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<package>
+	<metadata>
+		<id>WindsorAppConfigFacility.Azure</id>
+		<version>$version$</version>
+		<authors>Adam Connelly</authors>
+		<description>Azure extensions to the Windsor AppConfigFacility</description>
+		<language>en</language>
+		<projectUrl>https://github.com/adamconnelly/WindsorAppConfigFacility</projectUrl>
+		<licenseUrl>https://raw.githubusercontent.com/adamconnelly/WindsorAppConfigFacility/master/LICENSE.txt</licenseUrl>
+
+		<dependencies>
+			<dependency id="Castle.Core" version="3.3.0" />
+  			<dependency id="Castle.Windsor" version="3.3.0" />
+		</dependencies>
+	</metadata>
+
+	<files>
+		<file src="bin\Release\AppConfigFacility.dll" target="lib" />
+		<file src="bin\Release\AppConfigFacility.pdb" target="lib" />
+		<file src="bin\Release\AppConfigFacility.xml" target="lib" />
+	</files>
+</package>

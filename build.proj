@@ -3,6 +3,8 @@
 
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\.build</MSBuildCommunityTasksPath>
+    <Version>0.1.0.0</Version>
+    <BuildDirectory>build</BuildDirectory>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
@@ -16,8 +18,16 @@
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
   
   <Target Name="CI" DependsOnTargets="Build;RunTests" />
+
+  <Target Name="GenerateAssemblyInfo">
+  	<AssemblyInfo CodeLanguage="CS"
+  		OutputFile="SolutionInfo.cs"
+  		AssemblyVersion="$(Version)"
+  		AssemblyFileVersion="$(Version)"
+  		AssemblyCopyright="Copyright (c) Adam Connelly, 2014" />
+  </Target>
  
-  <Target Name="Build">
+  <Target Name="Build" DependsOnTarget="GenerateAssemblyInfo">
     <MSBuild Projects="AppConfigFacility.sln" Properties="Configuration=Release;Platform=Any CPU" />
   </Target>
 
@@ -28,6 +38,15 @@
     </ItemGroup>
 
     <NUnit ToolPath="$(NUnitToolPath)" Assemblies="%(TestAssemblies.Filename)%(Extension)" WorkingDirectory="%(TestAssemblies.RelativeDir)"/>
+  </Target>
+
+  <Target Name="NuGetPack" DependsOnTargets="RunTests">
+  	<ItemGroup>
+  		<NuSpecFiles Include="**\*.nuspec" />
+  	</ItemGroup>
+
+  	<MakeDir Condition="!Exists('$(BuildDirectory)')" Directories="$(BuildDirectory)" />
+  	<Exec Command="NuGet pack -Symbols -OutputDirectory $(BuildDirectory) -BasePath %(NuSpecFiles.RelativeDir) -Properties version=$(Version) %(NuSpecFiles.RelativeDir)%(NuSpecFiles.Filename)%(NuSpecFiles.Extension)" />
   </Target>
  
 </Project>
