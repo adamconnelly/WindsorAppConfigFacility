@@ -23,7 +23,7 @@
 
   <Target Name="RunTests">
     <ItemGroup>
-      <TestAssemblies Include="Tests\**\bin\**\*.Tests.dll" />
+      <TestAssemblies Include="Tests\**\bin\Release\*.Tests.dll" />
     </ItemGroup>
 
     <Message Text="Running Tests for %(TestAssemblies.Filename)%(Extension) in %(TestAssemblies.RelativeDir)"/>
