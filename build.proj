@@ -21,12 +21,12 @@
     <MSBuild Projects="AppConfigFacility.sln" Properties="Configuration=Release;Platform=Any CPU" />
   </Target>
 
-  <Target Name="RunTests">
+  <Target Name="RunTests" DependsOnTargets="Build">
     <ItemGroup>
-      <TestAssemblies Include="Tests\**\bin\Release\*.Tests.dll" Exclude="obj\**" />
+      <TestAssemblies Include="Tests\AppConfigFacility.Tests\bin\Release\*.Tests.dll" />
+      <TestAssemblies Include="Tests\AppConfigFacility.Azure.Tests\bin\Release\*.Tests.dll" />
     </ItemGroup>
 
-    <Message Text="Running Tests for %(TestAssemblies.Filename)%(Extension) in %(TestAssemblies.RelativeDir)"/>
     <NUnit ToolPath="$(NUnitToolPath)" Assemblies="%(TestAssemblies.Filename)%(Extension)" WorkingDirectory="%(TestAssemblies.RelativeDir)"/>
   </Target>
  
