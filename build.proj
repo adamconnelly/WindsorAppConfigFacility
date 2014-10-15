@@ -26,6 +26,7 @@
       <TestAssemblies Include="Tests\**\bin\**\*.Tests.dll" />
     </ItemGroup>
 
+    <Message Text="Running Tests for %(TestAssemblies.Filename)%(Extension) in %(TestAssemblies.RelativeDir)"/>
     <NUnit ToolPath="$(NUnitToolPath)" Assemblies="%(TestAssemblies.Filename)%(Extension)" WorkingDirectory="%(TestAssemblies.RelativeDir)"/>
   </Target>
  
