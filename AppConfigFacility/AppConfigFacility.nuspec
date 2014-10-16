@@ -16,8 +16,9 @@
 	</metadata>
 
 	<files>
-		<file src="bin\Release\AppConfigFacility.dll" target="lib" />
-		<file src="bin\Release\AppConfigFacility.pdb" target="lib" />
-		<file src="bin\Release\AppConfigFacility.xml" target="lib" />
+		<file src="bin\Release\AppConfigFacility.dll" target="lib\net45" />
+		<file src="bin\Release\AppConfigFacility.pdb" target="lib\net45" />
+		<file src="bin\Release\AppConfigFacility.xml" target="lib\net45" />
+    <file src="**\*.cs" exclude="**\obj\*.*" target="src"/>
 	</files>
 </package>

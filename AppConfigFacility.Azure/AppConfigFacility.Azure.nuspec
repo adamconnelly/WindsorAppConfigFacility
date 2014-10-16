@@ -17,8 +17,9 @@
 	</metadata>
 
 	<files>
-		<file src="bin\Release\AppConfigFacility.Azure.dll" target="lib" />
-		<file src="bin\Release\AppConfigFacility.Azure.pdb" target="lib" />
-		<file src="bin\Release\AppConfigFacility.Azure.xml" target="lib" />
+		<file src="bin\Release\AppConfigFacility.Azure.dll" target="lib\net45" />
+		<file src="bin\Release\AppConfigFacility.Azure.pdb" target="lib\net45" />
+		<file src="bin\Release\AppConfigFacility.Azure.xml" target="lib\net45" />
+    <file src="**\*.cs" exclude="**\obj\*.*" target="src"/>
 	</files>
 </package>

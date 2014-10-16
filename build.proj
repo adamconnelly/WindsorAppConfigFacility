@@ -17,7 +17,7 @@
   
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
   
-  <Target Name="CI" DependsOnTargets="GenerateAssemblyInfo;Build;RunTests" />
+  <Target Name="CI" DependsOnTargets="Build;RunTests" />
 
   <Target Name="GenerateAssemblyInfo">
   	<AssemblyInfo CodeLanguage="CS"
@@ -27,7 +27,7 @@
   		AssemblyCopyright="Copyright (c) Adam Connelly, 2014" />
   </Target>
  
-  <Target Name="Build" DependsOnTarget="GenerateAssemblyInfo">
+  <Target Name="Build" DependsOnTargets="GenerateAssemblyInfo">
     <MSBuild Projects="AppConfigFacility.sln" Properties="Configuration=Release;Platform=Any CPU" />
   </Target>
 

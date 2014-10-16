@@ -5,7 +5,7 @@ A Windsor facility for automatically implementing interfaces to access applicati
 
 License: [MIT](http://www.opensource.org/licenses/mit-license.php)
 
-### NuGet: TODO
+### NuGet: [WindsorAppConfigFacility](https://www.nuget.org/packages/WindsorAppConfigFacility)
 
 ## What's it for?
 Sometimes you need to use settings to alter how your application behaves. The default way to do this is using AppSettings via an app.config or web.config file. Accessing the AppSettings dictionary directly isn't great for unit testing because the objects being tested then have an external dependency that may not be obvious, and may rely on magic strings to work.
@@ -108,5 +108,57 @@ By default the facility doesn't cache any of your settings. What this means is t
 container.AddFacility<AppConfigFacility>(f => f.CacheSettings());
 ```
 
-## Advanced Stuff
-TODO
+### Computed Properties
+You can specify computed properties when registering your settings interface. For example, if you have the following settings:
+
+```xml
+<appSettings>
+  <add key="FirstName" value="Adam"/>
+  <add key="LastName" value="Connelly"/>
+</appSettings>
+```
+
+And the following interface:
+
+```csharp
+public interface IPersonConfig
+{
+    string FirstName { get; }
+    string LastName { get; }
+    string FullName { get; }
+}
+```
+
+You can implement ```FullName``` by registering IPersonConfig as follows:
+
+```csharp
+container.Register(Component.For<IPersonConfig>().FromAppConfig(
+    o => o.Computed(p => p.FullName, p => p.FirstName + " " + p.LastName)));
+```
+
+## Advanced
+### Custom Settings Provider
+If you need to get your settings from somewhere other than AppSettings or the Azure CloudConfigurationManager, you can create your own implementation of ```ISettingsProvider```:
+
+```csharp
+public interface ISettingsProvider
+{
+    /// <summary>
+    /// Gets the specified setting.
+    /// </summary>
+    /// <param name="key">The setting key.</param>
+    /// <param name="returnType">The type of the setting.</param>
+    /// <returns>
+    /// The setting.
+    /// </returns>
+    object GetSetting(string key, Type returnType);
+}
+```
+
+To use your own settings provider, just use the UseSettingsProvider() method when adding the facility. So if you had created an implementation that got its settings from a database, you might do something like this:
+
+```csharp
+container.AddFacility<AppConfigFacility>(c => c.UseSettingsProvider<DatabaseSettingsProvider>());
+```
+
+If you're creating your own settings provider, you probably want to inherit from ```SettingsProviderBase```. This handles converting your settings to the correct types, so all you need to care about is getting them from somewhere.
