@@ -1,6 +1,6 @@
 ﻿namespace AppConfigFacility.Azure
 {
-    using Microsoft.WindowsAzure;
+    using Microsoft.Azure;
 
     /// <summary>
     /// Extensions for the <see cref="AppConfigFacility"/>.

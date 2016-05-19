@@ -1,6 +1,6 @@
 ﻿namespace AppConfigFacility.Azure
 {
-    using Microsoft.WindowsAzure;
+    using Microsoft.Azure;
 
     /// <summary>
     /// A settings provider that gets its settings using <see cref="CloudConfigurationManager"/>.

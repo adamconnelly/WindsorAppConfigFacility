@@ -13,7 +13,7 @@
       <dependency id="WindsorAppConfigFacility" version="$version$" />
 			<dependency id="Castle.Core" version="3.3.0" />
   		<dependency id="Castle.Windsor" version="3.3.0" />
-  		<dependency id="Microsoft.WindowsAzure.ConfigurationManager" version="2.0.3" />
+  		<dependency id="Microsoft.WindowsAzure.ConfigurationManager" version="3.2.1" />
 		</dependencies>
 	</metadata>
 
