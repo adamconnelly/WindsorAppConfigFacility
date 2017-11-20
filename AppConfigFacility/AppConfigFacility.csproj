@@ -51,10 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfigFacilityExtensions.cs" />
     <Compile Include="AppConfigInterceptor.cs" />
     <Compile Include="AppSettingsProvider.cs" />
     <Compile Include="ConfigConfiguration.cs" />
     <Compile Include="DefaultSettingsCache.cs" />
+    <Compile Include="EnvironmentSettingsProvider.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="IConfigConfiguration.cs" />
     <Compile Include="ISettingsCache.cs" />
