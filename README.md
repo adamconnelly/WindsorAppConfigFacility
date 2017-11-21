@@ -101,6 +101,24 @@ container.AddFacility<AppConfigFacility>(c => c.FromAzure());
 
 What this does is alters the facility so that it uses ```CloudConfigurationManager.GetSetting("MyKey")``` to access the settings.
 
+### Environment
+If you want to get your settings from the environment register the facility as follows:
+
+```csharp
+container.AddFacility<AppConfigFacility>(c => c.FromEnvironment());
+```
+
+### Multiple Sources
+You can register the facility to get the settings from multiple sources:
+
+```csharp
+container.AddFacility<AppConfigFacility>(c => c.FromEnvironment().FromAzure());
+```
+
+This will cause it to try to get each setting in the order you specify. So, in the example above, the facility will first look for a setting from an environment variable, and will then try to get it from Azure. The Azure support automatically falls back to checking AppSettings for you, but if you want to be explicit about it you can do:
+
+container.AddFacility<AppConfigFacility>(c => c.FromEnvironment().FromAzure().FromAppSettings());
+
 ### Caching
 By default the facility doesn't cache any of your settings. What this means is that it'll go back to the underlying data source (e.g. the web.config file or Azure CloudConfigurationManager) each time you get a setting. If you want it to cache your settings so it only gets them once, you can configure the facility as follows:
 

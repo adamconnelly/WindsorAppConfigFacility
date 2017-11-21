@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="Integration\AppConfigFacilityPrefixTests.cs" />
     <Compile Include="Integration\AppConfigFacilityEnvironmentTests.cs" />
+    <Compile Include="Integration\AppConfigFacilityMultipleProvidersTests.cs" />
+    <Compile Include="Unit\AggregateSettingsProviderTests.cs" />
     <Compile Include="Unit\AppConfigInterceptorTests.cs" />
     <Compile Include="ISearchConfig.cs" />
     <Compile Include="ITestConfig.cs" />

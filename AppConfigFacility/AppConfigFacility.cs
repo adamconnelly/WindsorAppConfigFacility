@@ -1,4 +1,8 @@
-﻿namespace AppConfigFacility
+﻿using System.Collections.Generic;
+using System.Linq;
+using Castle.MicroKernel;
+
+namespace AppConfigFacility
 {
     using System;
     using Castle.MicroKernel.Facilities;
@@ -11,7 +15,7 @@
     public class AppConfigFacility : AbstractFacility
     {
         private Type _cacheType = typeof (DefaultSettingsCache);
-        private Type _settingsProviderType = typeof (AppSettingsProvider);
+        private readonly List<Type> _settingsProviderTypes = new List<Type>();
 
         /// <summary>
         /// The custom initialization for the Facility.
@@ -23,8 +27,23 @@
         {
             Kernel.Register(
                 Component.For<ISettingsCache>().ImplementedBy(_cacheType),
-                Component.For<ISettingsProvider>().ImplementedBy(_settingsProviderType),
+                Component.For<ISettingsProvider>().UsingFactoryMethod(CreateSettingsProvider),
                 Component.For<AppConfigInterceptor>().LifestyleTransient());
+        }
+
+        private ISettingsProvider CreateSettingsProvider(IKernel kernel)
+        {
+            var providers = new List<ISettingsProvider> {new AppSettingsProvider()};
+            if (_settingsProviderTypes.Any())
+            {
+                providers = _settingsProviderTypes.Select(type =>
+                {
+                    kernel.Register(Component.For(type));
+                    return (ISettingsProvider) kernel.Resolve(type);
+                }).ToList();
+            }
+
+            return new AggregateSettingsProvider(providers);
         }
 
         /// <summary>
@@ -37,14 +56,16 @@
         }
 
         /// <summary>
-        /// Specified the type of settings provider to use.
+        /// Adds a new settings provider to the facility. The facility will attempt to get the setting
+        /// from each provider in turn based on the order they were added. So it will try to get the setting
+        /// from the provider that was added first, and then will fallback to the next provider, and so on.
         /// </summary>
         /// <typeparam name="T">
         /// The type of the settings provider.
         /// </typeparam>
-        public AppConfigFacility UseSettingsProvider<T>() where T : ISettingsProvider
+        public AppConfigFacility AddSettingsProvider<T>() where T : ISettingsProvider
         {
-            _settingsProviderType = typeof (T);
+            _settingsProviderTypes.Add(typeof(T));
             return this;
         }
     }

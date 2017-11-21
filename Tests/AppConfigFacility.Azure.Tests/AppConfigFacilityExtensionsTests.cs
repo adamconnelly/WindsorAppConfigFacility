@@ -1,4 +1,7 @@
-﻿namespace AppConfigFacility.Azure.Tests
+﻿using System.Linq;
+using Microsoft.Azure;
+
+namespace AppConfigFacility.Azure.Tests
 {
     using Castle.Windsor;
     using NUnit.Framework;
@@ -16,9 +19,9 @@
             container.AddFacility<AppConfigFacility>(c => c.FromAzure());
 
             // Assert
-            var provider = container.Resolve<ISettingsProvider>();
+            var provider = (AggregateSettingsProvider)container.Resolve<ISettingsProvider>();
 
-            Assert.IsInstanceOf<AzureSettingsProvider>(provider);
+            Assert.IsInstanceOf<AzureSettingsProvider>(provider.SettingsProviders.Single());
         }
     }
 }

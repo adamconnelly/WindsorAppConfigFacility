@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregateSettingsProvider.cs" />
     <Compile Include="AppConfigFacilityExtensions.cs" />
     <Compile Include="AppConfigInterceptor.cs" />
     <Compile Include="AppSettingsProvider.cs" />
