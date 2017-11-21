@@ -25,13 +25,10 @@ namespace AppConfigFacility.Tests.Unit
         }
 
         [Test]
-        public void FallsBackToAppConfigIfEnvironmentVariableNotSet()
+        public void ReturnsNullIfEnvironmentVariableNotSet()
         {
             // Arrange
-            const string expectedValue = "Test123";
-            const string variableName = "AppConfigFacilityTestVar";
-
-            ConfigurationManager.AppSettings[variableName] = expectedValue;
+            const string variableName = "StringSetting";
             
             var provider = new EnvironmentSettingsProvider();
 
@@ -39,7 +36,7 @@ namespace AppConfigFacility.Tests.Unit
             var setting = (string)provider.GetSetting(variableName, typeof(string));
 
             // Assert
-            Assert.AreEqual(expectedValue, setting);
+            Assert.IsNull(setting);
         }
     }
 }

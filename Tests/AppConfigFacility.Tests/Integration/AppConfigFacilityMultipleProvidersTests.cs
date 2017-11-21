@@ -36,10 +36,9 @@
             var config = CreateConfig();
 
             const string key = "StringSetting";
-            const string value = "MySettingValue";
+            var value = ConfigurationManager.AppSettings[key];
 
             Environment.SetEnvironmentVariable(key, null);
-            ConfigurationManager.AppSettings[key] = value;
 
             // Act
             var result = config.StringSetting;
@@ -55,10 +54,9 @@
             var config = CreateConfig();
 
             const string key = "StringSetting";
-            const string value = "MySettingValue";
+            const string value = "EnvironmentSettingValue";
 
             Environment.SetEnvironmentVariable(key, value);
-            ConfigurationManager.AppSettings[key] = "WrongValue";
 
             // Act
             var result = config.StringSetting;

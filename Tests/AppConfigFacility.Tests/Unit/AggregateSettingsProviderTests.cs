@@ -12,10 +12,8 @@ namespace AppConfigFacility.Tests.Unit
         public void GetSetting_CanGetSettingFromAppSettings()
         {
             // Arrange
-            const string key = "MySetting";
-            const string expectedValue = "AppSettingValue";
-
-            ConfigurationManager.AppSettings[key] = expectedValue;
+            const string key = "StringSetting";
+            var expectedValue = ConfigurationManager.AppSettings[key];
 
             var provider = new AggregateSettingsProvider(new[] {new AppSettingsProvider()});
 
@@ -30,7 +28,7 @@ namespace AppConfigFacility.Tests.Unit
         public void GetSetting_CanGetSettingFromEnvironmentInsteadOfAppSettings()
         {
             // Arrange
-            const string key = "MySetting";
+            const string key = "StringSetting";
             const string expectedValue = "EnvironmentValue";
 
             Environment.SetEnvironmentVariable(key, expectedValue);
@@ -49,11 +47,10 @@ namespace AppConfigFacility.Tests.Unit
         public void GetSetting_FallsBackToNextProviderIfFirstProviderHasNoValue()
         {
             // Arrange
-            const string key = "MySetting";
-            const string expectedValue = "AppSettingValue";
+            const string key = "StringSetting";
+            var expectedValue = ConfigurationManager.AppSettings[key];
 
             Environment.SetEnvironmentVariable(key, null);
-            ConfigurationManager.AppSettings[key] = expectedValue;
 
             var provider = new AggregateSettingsProvider(new List<ISettingsProvider>
                 {new EnvironmentSettingsProvider(), new AppSettingsProvider()});
