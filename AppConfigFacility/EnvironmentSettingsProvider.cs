@@ -8,7 +8,8 @@ namespace AppConfigFacility
     /// </summary>
     public class EnvironmentSettingsProvider : SettingsProviderBase
     {
-        protected override string GetSetting(string key)
+        /// <inheritdoc />
+        public override string GetSetting(string key)
         {
             return Environment.GetEnvironmentVariable(key);
         }

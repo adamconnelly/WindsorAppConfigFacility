@@ -8,7 +8,7 @@ namespace AppConfigFacility
     /// A wrapper around several <see cref="ISettingsProvider"/> objects that will attempt to get
     /// settings from each one in turn.
     /// </summary>
-    public class AggregateSettingsProvider : ISettingsProvider
+    public class AggregateSettingsProvider : SettingsProviderBase
     {
         private readonly IReadOnlyCollection<ISettingsProvider> _settingsProviders;
 
@@ -34,11 +34,16 @@ namespace AppConfigFacility
         /// </summary>
         public IReadOnlyCollection<ISettingsProvider> SettingsProviders => _settingsProviders;
 
-        public object GetSetting(string key, Type returnType)
+        public override object GetSetting(string key, Type returnType)
+        {
+            return ConvertSetting(GetSetting(key), returnType);
+        }
+
+        public override string GetSetting(string key)
         {
             foreach (var provider in _settingsProviders)
             {
-                var value = provider.GetSetting(key, returnType);
+                var value = provider.GetSetting(key);
                 if (value != null)
                 {
                     return value;
