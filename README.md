@@ -180,3 +180,18 @@ container.AddFacility<AppConfigFacility>(c => c.UseSettingsProvider<DatabaseSett
 ```
 
 If you're creating your own settings provider, you probably want to inherit from ```SettingsProviderBase```. This handles converting your settings to the correct types, so all you need to care about is getting them from somewhere.
+
+## Building and Publishing
+
+To build the project ready to be published run the following command:
+
+```
+msbuild .\build.proj /t:NuGetPack /p:"Configuration=Release;Version=0.4.0.0" /m
+```
+
+To publish the packages to the NuGet registry run the following commands:
+
+```
+nuget push .\build\WindsorAppConfigFacility.0.4.0.nupkg -Source https://www.nuget.org
+nuget push .\build\WindsorAppConfigFacility.Azure.0.4.0.nupkg -Source https://www.nuget.org
+```
