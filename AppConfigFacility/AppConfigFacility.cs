@@ -33,7 +33,7 @@ namespace AppConfigFacility
 
         private ISettingsProvider CreateSettingsProvider(IKernel kernel)
         {
-            var providers = new List<ISettingsProvider> {new AppSettingsProvider()};
+            var providers = new List<ISettingsProvider> {new AppSettingsProvider(kernel)};
             if (_settingsProviderTypes.Any())
             {
                 providers = _settingsProviderTypes.Select(type =>
@@ -43,7 +43,7 @@ namespace AppConfigFacility
                 }).ToList();
             }
 
-            return new AggregateSettingsProvider(providers);
+            return new AggregateSettingsProvider(kernel, providers);
         }
 
         /// <summary>

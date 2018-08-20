@@ -5,8 +5,7 @@ using NUnit.Framework;
 
 namespace AppConfigFacility.Tests.Unit
 {
-    [TestFixture]
-    public class AggregateSettingsProviderTests
+    public class AggregateSettingsProviderTests : BaseProviderTests
     {
         [Test]
         public void GetSetting_CanGetSettingFromAppSettings()
@@ -15,7 +14,7 @@ namespace AppConfigFacility.Tests.Unit
             const string key = "StringSetting";
             var expectedValue = ConfigurationManager.AppSettings[key];
 
-            var provider = new AggregateSettingsProvider(new[] {new AppSettingsProvider()});
+            var provider = CreateAggregateSettingsProvider(new[] {typeof(AppSettingsProvider)});
 
             // Act
             var value = provider.GetSetting(key, typeof(string));
@@ -33,8 +32,12 @@ namespace AppConfigFacility.Tests.Unit
 
             Environment.SetEnvironmentVariable(key, expectedValue);
 
-            var provider = new AggregateSettingsProvider(new List<ISettingsProvider>
-                {new EnvironmentSettingsProvider(), new AppSettingsProvider()});
+            var provider = CreateAggregateSettingsProvider(
+                new[]
+                {
+                    typeof(EnvironmentSettingsProvider),
+                    typeof(AppSettingsProvider)
+                });
 
             // Act
             var value = provider.GetSetting(key, typeof(string));
@@ -52,8 +55,12 @@ namespace AppConfigFacility.Tests.Unit
 
             Environment.SetEnvironmentVariable(key, null);
 
-            var provider = new AggregateSettingsProvider(new List<ISettingsProvider>
-                {new EnvironmentSettingsProvider(), new AppSettingsProvider()});
+            var provider = CreateAggregateSettingsProvider(
+                new[]
+                {
+                    typeof(EnvironmentSettingsProvider),
+                    typeof(AppSettingsProvider)
+                });
 
             // Act
             var value = provider.GetSetting(key, typeof(string));
@@ -65,8 +72,8 @@ namespace AppConfigFacility.Tests.Unit
         [Test]
         public void Constructor_ThrowsExceptionIfNoProvidersAreSpecified()
         {
-            Assert.Throws<ArgumentException>(() => new AggregateSettingsProvider(new List<ISettingsProvider>()));
-            Assert.Throws<ArgumentException>(() => new AggregateSettingsProvider(null));
+            Assert.Throws<ArgumentException>(() => new AggregateSettingsProvider(Container.Kernel, new List<ISettingsProvider>()));
+            Assert.Throws<ArgumentException>(() => new AggregateSettingsProvider(Container.Kernel, null));
         }
     }
 }
