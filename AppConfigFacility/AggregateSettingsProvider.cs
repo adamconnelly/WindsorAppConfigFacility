@@ -36,11 +36,6 @@ namespace AppConfigFacility
         /// </summary>
         public IReadOnlyCollection<ISettingsProvider> SettingsProviders => _settingsProviders;
 
-        public override object GetSetting(string key, Type returnType)
-        {
-            return ConvertSetting(GetSetting(key), returnType);
-        }
-
         public override string GetSetting(string key)
         {
             foreach (var provider in _settingsProviders)
