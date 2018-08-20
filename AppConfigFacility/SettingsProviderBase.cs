@@ -1,3 +1,6 @@
+using Castle.MicroKernel;
+using Castle.MicroKernel.SubSystems.Conversion;
+
 namespace AppConfigFacility
 {
     using System;
@@ -7,6 +10,18 @@ namespace AppConfigFacility
     /// </summary>
     public abstract class SettingsProviderBase : ISettingsProvider
     {
+        protected SettingsProviderBase(IKernel kernel)
+        {
+            if (kernel == null)
+            {
+                throw new ArgumentNullException(nameof(kernel));
+            }
+
+            ConversionManager = kernel.GetConversionManager();
+        }
+
+        protected IConversionManager ConversionManager { get; }
+
         /// <summary>
         /// Gets the specified setting and converts it to the specified type.
         /// </summary>
@@ -31,19 +46,9 @@ namespace AppConfigFacility
         /// <param name="value">The string representation.</param>
         /// <param name="returnType">The return type.</param>
         /// <returns>The value converted to the specified type.</returns>
-        protected object ConvertSetting(string value, Type returnType)
+        protected virtual object ConvertSetting(string value, Type returnType)
         {
-            if (returnType.IsEnum)
-            {
-                return Enum.Parse(returnType, value);
-            }
-
-            if (returnType == typeof(Uri))
-            {
-                return new Uri(value);
-            }
-
-            return Convert.ChangeType(value, returnType);
+            return ConversionManager.PerformConversion(value, returnType);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace AppConfigFacility
+﻿using Castle.MicroKernel;
+
+namespace AppConfigFacility
 {
     using System.Configuration;
 
@@ -7,6 +9,10 @@
     /// </summary>
     public class AppSettingsProvider : SettingsProviderBase
     {
+        public AppSettingsProvider(IKernel kernel) : base(kernel)
+        {
+        }
+
         /// <inheritdoc />
         public override string GetSetting(string key)
         {

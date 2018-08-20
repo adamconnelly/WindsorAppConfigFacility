@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Castle.MicroKernel;
 
@@ -33,17 +34,21 @@ namespace AppConfigFacility
 
         private ISettingsProvider CreateSettingsProvider(IKernel kernel)
         {
-            var providers = new List<ISettingsProvider> {new AppSettingsProvider()};
+            IReadOnlyCollection<ISettingsProvider> providers;
             if (_settingsProviderTypes.Any())
             {
                 providers = _settingsProviderTypes.Select(type =>
                 {
                     kernel.Register(Component.For(type));
                     return (ISettingsProvider) kernel.Resolve(type);
-                }).ToList();
+                }).ToList().AsReadOnly();
+            }
+            else
+            {
+                providers = new ReadOnlyCollection<ISettingsProvider>(new List<ISettingsProvider>(new []{new AppSettingsProvider(kernel)}));
             }
 
-            return new AggregateSettingsProvider(providers);
+            return new AggregateSettingsProvider(kernel, providers);
         }
 
         /// <summary>

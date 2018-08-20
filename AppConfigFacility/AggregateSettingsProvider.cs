@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Castle.MicroKernel;
 
 namespace AppConfigFacility
 {
@@ -15,11 +16,12 @@ namespace AppConfigFacility
         /// <summary>
         /// Creates a new instance of the <see cref="AggregateSettingsProvider"/> class.
         /// </summary>
+        /// <param name="kernel">Our current IoC Castle Windsor container</param>
         /// <param name="settingsProviders">
         /// The list of settings providers to use to get the settings. They will be iterated over in turn,
         /// and the first non-null result will be returned when retrieving a setting.
         /// </param>
-        public AggregateSettingsProvider(IReadOnlyCollection<ISettingsProvider> settingsProviders)
+        public AggregateSettingsProvider(IKernel kernel, IReadOnlyCollection<ISettingsProvider> settingsProviders) : base(kernel)
         {
             if (settingsProviders == null || !settingsProviders.Any())
             {
@@ -33,11 +35,6 @@ namespace AppConfigFacility
         /// Gets the collection of providers the aggregate provider is using.
         /// </summary>
         public IReadOnlyCollection<ISettingsProvider> SettingsProviders => _settingsProviders;
-
-        public override object GetSetting(string key, Type returnType)
-        {
-            return ConvertSetting(GetSetting(key), returnType);
-        }
 
         public override string GetSetting(string key)
         {

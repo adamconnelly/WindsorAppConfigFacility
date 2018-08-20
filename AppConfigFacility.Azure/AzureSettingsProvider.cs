@@ -1,4 +1,6 @@
-﻿namespace AppConfigFacility.Azure
+﻿using Castle.MicroKernel;
+
+namespace AppConfigFacility.Azure
 {
     using Microsoft.Azure;
 
@@ -7,6 +9,10 @@
     /// </summary>
     public class AzureSettingsProvider : SettingsProviderBase
     {
+        public AzureSettingsProvider(IKernel kernel) : base(kernel)
+        {
+        }
+
         /// <inheritdoc />
         public override string GetSetting(string key)
         {
