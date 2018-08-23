@@ -1,4 +1,7 @@
-﻿namespace AppConfigFacility.Tests.Integration
+﻿using Castle.Core.Configuration;
+using Castle.MicroKernel.SubSystems.Conversion;
+
+namespace AppConfigFacility.Tests.Integration
 {
     using System;
     using System.Configuration;
@@ -80,6 +83,34 @@
         }
 
         [Test]
+        public void CanRetrieveTimeSpanPropertyFromConfig()
+        {
+            // Arrange
+            var config = CreateConfig();
+
+            // Act
+            var result = config.TimeSpanSetting;
+
+            // Assert
+            var expected = TimeSpan.Parse(ConfigurationManager.AppSettings["TimeSpanSetting"]);
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void CanRetrieveVersionPropertyFromConfig()
+        {
+            // Arrange
+            var config = CreateConfig();
+
+            // Act
+            var result = config.VersionSetting;
+
+            // Assert
+            var expected = Version.Parse(ConfigurationManager.AppSettings["VersionSetting"]);
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
         public void RegistersDefaultSettingsCacheByDefault()
         {
             // Arrange
@@ -113,12 +144,13 @@
 
             _container.AddFacility<AppConfigFacility>();
 
-            _container.Register(Component.For<ITestConfig>().FromAppConfig(
-                // TODO: Something like the following for creating computed settings
-                //c => c.Configure(t => t.ComputedSetting).ComputedBy(t => t.StringSetting + " " + t.IntSetting)
-                ));
+            _container.Register(Component.For<ITestConfig>().FromAppConfig());
+
+            var conversionManager = _container.Kernel.GetConversionManager();
+            conversionManager.Add(new VersionConverter());
 
             return _container.Resolve<ITestConfig>();
         }
+        
     }
 }
