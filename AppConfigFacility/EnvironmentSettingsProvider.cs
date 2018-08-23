@@ -1,4 +1,5 @@
 ﻿using System;
+using Castle.MicroKernel;
 
 namespace AppConfigFacility
 {
@@ -8,6 +9,10 @@ namespace AppConfigFacility
     /// </summary>
     public class EnvironmentSettingsProvider : SettingsProviderBase
     {
+        public EnvironmentSettingsProvider(IKernel kernel) : base(kernel)
+        {
+        }
+
         /// <inheritdoc />
         public override string GetSetting(string key)
         {

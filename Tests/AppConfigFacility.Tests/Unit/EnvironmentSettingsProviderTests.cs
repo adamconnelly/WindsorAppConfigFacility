@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Configuration;
 using NUnit.Framework;
 
 namespace AppConfigFacility.Tests.Unit
 {
-    [TestFixture]
-    public class EnvironmentSettingsProviderTests
+    public class EnvironmentSettingsProviderTests : BaseProviderTests
     {
         [Test]
         public void CanGetSettingFromEnvironment()
@@ -15,7 +13,7 @@ namespace AppConfigFacility.Tests.Unit
             const string variableName = "AppConfigFacilityTestVar";
 
             Environment.SetEnvironmentVariable(variableName, expectedValue);
-            var provider = new EnvironmentSettingsProvider();
+            var provider = EnvironmentSettingsProvider;
 
             // Act
             var setting = (string)provider.GetSetting(variableName, typeof(string));
@@ -30,7 +28,7 @@ namespace AppConfigFacility.Tests.Unit
             // Arrange
             const string variableName = "StringSetting";
             
-            var provider = new EnvironmentSettingsProvider();
+            var provider = EnvironmentSettingsProvider;
 
             // Act
             var setting = (string)provider.GetSetting(variableName, typeof(string));

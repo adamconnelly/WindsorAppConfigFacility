@@ -58,9 +58,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Integration\AbstractTypeConverter.cs" />
     <Compile Include="Integration\AppConfigFacilityPrefixTests.cs" />
     <Compile Include="Integration\AppConfigFacilityEnvironmentTests.cs" />
     <Compile Include="Integration\AppConfigFacilityMultipleProvidersTests.cs" />
+    <Compile Include="Integration\VersionConverter.cs" />
     <Compile Include="Unit\AggregateSettingsProviderTests.cs" />
     <Compile Include="Unit\AppConfigInterceptorTests.cs" />
     <Compile Include="ISearchConfig.cs" />
@@ -69,6 +71,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnum.cs" />
     <Compile Include="Integration\AppConfigFacilityComputedTests.cs" />
+    <Compile Include="Unit\BaseProviderTests.cs" />
+    <Compile Include="Unit\BaseTests.cs" />
     <Compile Include="Unit\EnvironmentSettingsProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
