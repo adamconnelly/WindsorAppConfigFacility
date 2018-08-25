@@ -10,17 +10,21 @@ namespace AppConfigFacility
     /// </summary>
     public abstract class SettingsProviderBase : ISettingsProvider
     {
-        protected SettingsProviderBase(IKernel kernel)
+        private readonly IConversionManager _conversionManager;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SettingsProviderBase"/> class.
+        /// </summary>
+        /// <param name="conversionManager">Used to convert settings to their required types.</param>
+        protected SettingsProviderBase(IConversionManager conversionManager)
         {
-            if (kernel == null)
+            if (conversionManager == null)
             {
-                throw new ArgumentNullException(nameof(kernel));
+                throw new ArgumentNullException(nameof(conversionManager));
             }
 
-            ConversionManager = kernel.GetConversionManager();
+            _conversionManager = conversionManager;
         }
-
-        protected IConversionManager ConversionManager { get; }
 
         /// <summary>
         /// Gets the specified setting and converts it to the specified type.
@@ -46,9 +50,9 @@ namespace AppConfigFacility
         /// <param name="value">The string representation.</param>
         /// <param name="returnType">The return type.</param>
         /// <returns>The value converted to the specified type.</returns>
-        protected virtual object ConvertSetting(string value, Type returnType)
+        private object ConvertSetting(string value, Type returnType)
         {
-            return ConversionManager.PerformConversion(value, returnType);
+            return _conversionManager.PerformConversion(value, returnType);
         }
     }
 }

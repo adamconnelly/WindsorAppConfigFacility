@@ -1,4 +1,5 @@
 ﻿using Castle.MicroKernel;
+using Castle.MicroKernel.SubSystems.Conversion;
 
 namespace AppConfigFacility
 {
@@ -9,7 +10,11 @@ namespace AppConfigFacility
     /// </summary>
     public class AppSettingsProvider : SettingsProviderBase
     {
-        public AppSettingsProvider(IKernel kernel) : base(kernel)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AppSettingsProvider"/> class.
+        /// </summary>
+        /// <param name="conversionManager">Used to convert settings to their required types.</param>
+        public AppSettingsProvider(IConversionManager conversionManager) : base(conversionManager)
         {
         }
 

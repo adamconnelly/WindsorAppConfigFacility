@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using Castle.MicroKernel.SubSystems.Conversion;
 using NUnit.Framework;
 
 namespace AppConfigFacility.Tests.Unit
 {
-    public class AggregateSettingsProviderTests : BaseProviderTests
+    [TestFixture]
+    public class AggregateSettingsProviderTests
     {
         [Test]
         public void GetSetting_CanGetSettingFromAppSettings()
@@ -13,8 +15,10 @@ namespace AppConfigFacility.Tests.Unit
             // Arrange
             const string key = "StringSetting";
             var expectedValue = ConfigurationManager.AppSettings[key];
+            var conversionManager = new DefaultConversionManager();
 
-            var provider = CreateAggregateSettingsProvider(new[] {typeof(AppSettingsProvider)});
+            var provider = new AggregateSettingsProvider(conversionManager,
+                new[] {new AppSettingsProvider(conversionManager)});
 
             // Act
             var value = provider.GetSetting(key, typeof(string));
@@ -29,14 +33,15 @@ namespace AppConfigFacility.Tests.Unit
             // Arrange
             const string key = "StringSetting";
             const string expectedValue = "EnvironmentValue";
+            var conversionManager = new DefaultConversionManager();
 
             Environment.SetEnvironmentVariable(key, expectedValue);
 
-            var provider = CreateAggregateSettingsProvider(
-                new[]
+            var provider = new AggregateSettingsProvider(conversionManager,
+                new List<ISettingsProvider>
                 {
-                    typeof(EnvironmentSettingsProvider),
-                    typeof(AppSettingsProvider)
+                    new EnvironmentSettingsProvider(conversionManager),
+                    new AppSettingsProvider(conversionManager)
                 });
 
             // Act
@@ -52,14 +57,15 @@ namespace AppConfigFacility.Tests.Unit
             // Arrange
             const string key = "StringSetting";
             var expectedValue = ConfigurationManager.AppSettings[key];
+            var conversionManager = new DefaultConversionManager();
 
             Environment.SetEnvironmentVariable(key, null);
 
-            var provider = CreateAggregateSettingsProvider(
-                new[]
+            var provider = new AggregateSettingsProvider(conversionManager,
+                new List<ISettingsProvider>
                 {
-                    typeof(EnvironmentSettingsProvider),
-                    typeof(AppSettingsProvider)
+                    new EnvironmentSettingsProvider(conversionManager),
+                    new AppSettingsProvider(conversionManager)
                 });
 
             // Act
@@ -72,8 +78,9 @@ namespace AppConfigFacility.Tests.Unit
         [Test]
         public void Constructor_ThrowsExceptionIfNoProvidersAreSpecified()
         {
-            Assert.Throws<ArgumentException>(() => new AggregateSettingsProvider(Container.Kernel, new List<ISettingsProvider>()));
-            Assert.Throws<ArgumentException>(() => new AggregateSettingsProvider(Container.Kernel, null));
+            var conversionManager = new DefaultConversionManager();
+            Assert.Throws<ArgumentException>(() => new AggregateSettingsProvider(conversionManager, new List<ISettingsProvider>()));
+            Assert.Throws<ArgumentException>(() => new AggregateSettingsProvider(conversionManager, null));
         }
     }
 }

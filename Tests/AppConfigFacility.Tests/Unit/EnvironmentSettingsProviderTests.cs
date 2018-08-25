@@ -1,9 +1,11 @@
 ﻿using System;
+using Castle.MicroKernel.SubSystems.Conversion;
 using NUnit.Framework;
 
 namespace AppConfigFacility.Tests.Unit
 {
-    public class EnvironmentSettingsProviderTests : BaseProviderTests
+    [TestFixture]
+    public class EnvironmentSettingsProviderTests
     {
         [Test]
         public void CanGetSettingFromEnvironment()
@@ -13,7 +15,7 @@ namespace AppConfigFacility.Tests.Unit
             const string variableName = "AppConfigFacilityTestVar";
 
             Environment.SetEnvironmentVariable(variableName, expectedValue);
-            var provider = EnvironmentSettingsProvider;
+            var provider = new EnvironmentSettingsProvider(new DefaultConversionManager());
 
             // Act
             var setting = (string)provider.GetSetting(variableName, typeof(string));
@@ -28,7 +30,7 @@ namespace AppConfigFacility.Tests.Unit
             // Arrange
             const string variableName = "StringSetting";
             
-            var provider = EnvironmentSettingsProvider;
+            var provider = new EnvironmentSettingsProvider(new DefaultConversionManager());
 
             // Act
             var setting = (string)provider.GetSetting(variableName, typeof(string));

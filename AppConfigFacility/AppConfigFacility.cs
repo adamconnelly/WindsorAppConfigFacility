@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Castle.MicroKernel;
+using Castle.MicroKernel.SubSystems.Conversion;
 
 namespace AppConfigFacility
 {
@@ -34,6 +35,13 @@ namespace AppConfigFacility
 
         private ISettingsProvider CreateSettingsProvider(IKernel kernel)
         {
+            if (!kernel.HasComponent(typeof(IConversionManager)))
+            {
+                kernel.Register(Component.For<IConversionManager>().UsingFactoryMethod(k => k.GetConversionManager()));
+            }
+
+            var conversionManager = kernel.Resolve<IConversionManager>();
+
             IReadOnlyCollection<ISettingsProvider> providers;
             if (_settingsProviderTypes.Any())
             {
@@ -45,10 +53,11 @@ namespace AppConfigFacility
             }
             else
             {
-                providers = new ReadOnlyCollection<ISettingsProvider>(new List<ISettingsProvider>(new []{new AppSettingsProvider(kernel)}));
+                providers = new ReadOnlyCollection<ISettingsProvider>(
+                    new List<ISettingsProvider>(new[] {new AppSettingsProvider(conversionManager)}));
             }
 
-            return new AggregateSettingsProvider(kernel, providers);
+            return new AggregateSettingsProvider(conversionManager, providers);
         }
 
         /// <summary>

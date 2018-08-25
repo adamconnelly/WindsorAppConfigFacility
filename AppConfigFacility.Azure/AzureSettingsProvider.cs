@@ -1,4 +1,5 @@
 ﻿using Castle.MicroKernel;
+using Castle.MicroKernel.SubSystems.Conversion;
 
 namespace AppConfigFacility.Azure
 {
@@ -9,7 +10,11 @@ namespace AppConfigFacility.Azure
     /// </summary>
     public class AzureSettingsProvider : SettingsProviderBase
     {
-        public AzureSettingsProvider(IKernel kernel) : base(kernel)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AzureSettingsProvider"/> class.
+        /// </summary>
+        /// <param name="conversionManager">Used to convert settings to their required types.</param>
+        public AzureSettingsProvider(IConversionManager conversionManager) : base(conversionManager)
         {
         }
 
