@@ -8,7 +8,7 @@
 		<language>en</language>
 		<projectUrl>https://github.com/adamconnelly/WindsorAppConfigFacility</projectUrl>
 		<licenseUrl>https://raw.githubusercontent.com/adamconnelly/WindsorAppConfigFacility/master/LICENSE.txt</licenseUrl>
-    <releaseNotes>Updated to support Castle 4.0.0 and above. No-longer supports Castle 3.*.</releaseNotes>
+    <releaseNotes>Updated to use Windsor IConversionManager instead of Convert.ChangeType().</releaseNotes>
 
 		<dependencies>
 			<dependency id="Castle.Core" version="4.0.0" />
