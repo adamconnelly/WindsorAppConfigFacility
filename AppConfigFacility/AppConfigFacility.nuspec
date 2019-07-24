@@ -11,8 +11,8 @@
     <releaseNotes>Updated to use Windsor IConversionManager instead of Convert.ChangeType().</releaseNotes>
 
 		<dependencies>
-			<dependency id="Castle.Core" version="4.0.0" />
-  	  <dependency id="Castle.Windsor" version="4.0.0" />
+			<dependency id="Castle.Core" version="[4.4.0, 5.0.0)" />
+  	  <dependency id="Castle.Windsor" version="[5.0.0, 6.0.0)" />
 		</dependencies>
 	</metadata>
 
