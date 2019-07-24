@@ -1,4 +1,6 @@
-﻿namespace AppConfigFacility.Tests.Unit
+﻿using Castle.MicroKernel;
+
+namespace AppConfigFacility.Tests.Unit
 {
     using System;
     using System.Collections.Generic;
@@ -42,7 +44,7 @@
             interceptor.SetInterceptedComponentModel(
                 new ComponentModel(new ComponentName("AppConfigInterceptorTests", false),
                     new List<Type> {typeof (AppConfigInterceptorTests)}, typeof (AppConfigInterceptorTests),
-                    new Dictionary<string, object> {{AppConfigInterceptor.PrefixKey, "SomePrefix:"}}));
+                    Arguments.FromNamed(new []{ new KeyValuePair<string, object>(AppConfigInterceptor.PrefixKey, "SomePrefix:") })));
 
             _settingsProvider.Setup(p => p.GetSetting("SomePrefix:Name", typeof(string))).Returns("My Name");
             var invocation =
