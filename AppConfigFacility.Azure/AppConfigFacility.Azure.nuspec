@@ -7,7 +7,7 @@
 		<description>Azure extensions to the Windsor AppConfigFacility</description>
 		<language>en</language>
 		<projectUrl>https://github.com/adamconnelly/WindsorAppConfigFacility</projectUrl>
-		<licenseUrl>https://raw.githubusercontent.com/adamconnelly/WindsorAppConfigFacility/master/LICENSE.txt</licenseUrl>
+		<license type="expression">MIT</license>
 	  <releaseNotes>Updated to use Windsor IConversionManager instead of Convert.ChangeType().</releaseNotes>
 
 		<dependencies>

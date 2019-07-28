@@ -1,0 +1,33 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+name: 1.2.0.$(Rev:r)
+
+trigger:
+- master
+
+pool:
+  vmImage: 'vs2017-win2016'
+
+steps:
+- task: NuGetToolInstaller@0
+  displayName: 'Install NuGet'
+  inputs:
+    versionSpec: '5.2.0'
+
+- task: NuGetCommand@2
+  displayName: 'Restore NuGet packages'
+  inputs:
+    command: 'restore'
+    restoreSolution: 'AppConfigFacility.sln'
+
+- task: MSBuild@1
+  displayName: 'Build project'
+  inputs:
+    solution: 'build.proj'
+    msbuildArguments: '/t:NuGetPack /p:Configuration=Release;Version=$(Build.BuildNumber) /m'
+
+- publish: '$(System.DefaultWorkingDirectory)\build'
+  artifact: 'artifacts'

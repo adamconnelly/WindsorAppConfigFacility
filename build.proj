@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\.build</MSBuildCommunityTasksPath>
-    <Version>0.2.0.0</Version>
+    <Version>1.0.0.0</Version>
     <BuildDirectory>build</BuildDirectory>
   </PropertyGroup>
 
