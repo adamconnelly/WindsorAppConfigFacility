@@ -1,7 +1,7 @@
 # Windsor App Config Facility
 A Windsor facility for automatically implementing interfaces to access application settings.
 
-[![Build Status](https://travis-ci.org/adamconnelly/WindsorAppConfigFacility.svg?branch=master)](https://travis-ci.org/adamconnelly/WindsorAppConfigFacility)
+[![Build Status](https://dev.azure.com/adamrpconnelly/WindsorAppConfigFacility/_apis/build/status/adamconnelly.WindsorAppConfigFacility?branchName=master)](https://dev.azure.com/adamrpconnelly/WindsorAppConfigFacility/_build/latest?definitionId=2&branchName=master)
 
 License: [MIT](http://www.opensource.org/licenses/mit-license.php)
 
