@@ -4,15 +4,8 @@
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\.build</MSBuildCommunityTasksPath>
     <Version>1.0.0.0</Version>
-    <BuildDirectory>build</BuildDirectory>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
-    <NUnitToolPath>$(MSBuildProjectDirectory)\packages\NUnit.Runners.2.6.3\tools</NUnitToolPath>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(OS)' != 'Windows_NT'">
-    <NUnitToolPath>/usr/bin</NUnitToolPath>
+    <BuildDirectory>$(MSBuildProjectDirectory)\build</BuildDirectory>
+    <NUnitToolPath>$(MSBuildProjectDirectory)\packages\NUnit.ConsoleRunner.3.10.0\tools\nunit3-console.exe</NUnitToolPath>
   </PropertyGroup>
   
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
@@ -37,7 +30,7 @@
       <TestAssemblies Include="Tests\AppConfigFacility.Azure.Tests\bin\Release\*.Tests.dll" />
     </ItemGroup>
 
-    <NUnit ToolPath="$(NUnitToolPath)" Assemblies="%(TestAssemblies.Filename)%(Extension)" WorkingDirectory="%(TestAssemblies.RelativeDir)"/>
+    <Exec Command="$(NUnitToolPath) %(TestAssemblies.RelativeDir)\%(Filename)%(Extension) --result:$(BuildDirectory)\%(Filename)-nunit.xml;format=nunit3" />
   </Target>
 
   <Target Name="NuGetPack" DependsOnTargets="RunTests">
