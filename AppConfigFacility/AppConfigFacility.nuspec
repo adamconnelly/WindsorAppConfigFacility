@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <package>
 	<metadata>
 		<id>WindsorAppConfigFacility</id>
@@ -8,7 +8,7 @@
 		<language>en</language>
 		<projectUrl>https://github.com/adamconnelly/WindsorAppConfigFacility</projectUrl>
 		<license type="expression">MIT</license>
-    <releaseNotes>Updated to use Windsor IConversionManager instead of Convert.ChangeType().</releaseNotes>
+    	<releaseNotes>Update to support Windsor 5. NOTE: older versions are no-longer supported.</releaseNotes>
 
 		<dependencies>
 			<dependency id="Castle.Core" version="[4.4.0, 5.0.0)" />
