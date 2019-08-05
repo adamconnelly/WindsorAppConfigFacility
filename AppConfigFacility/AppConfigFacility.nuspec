@@ -1,25 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <package>
-	<metadata>
-		<id>WindsorAppConfigFacility</id>
-		<version>$version$</version>
-		<authors>Adam Connelly</authors>
-		<description>A Windsor facility that allows you to create interfaces to access your app settings</description>
-		<language>en</language>
-		<projectUrl>https://github.com/adamconnelly/WindsorAppConfigFacility</projectUrl>
-		<license type="expression">MIT</license>
-    	<releaseNotes>Update to support Windsor 5. NOTE: older versions are no-longer supported.</releaseNotes>
+    <metadata>
+        <id>WindsorAppConfigFacility</id>
+        <version>$version$</version>
+        <authors>Adam Connelly</authors>
+        <description>A Windsor facility that allows you to create interfaces to access your app settings</description>
+        <language>en</language>
+        <projectUrl>https://github.com/adamconnelly/WindsorAppConfigFacility</projectUrl>
+        <license type="expression">MIT</license>
+        <releaseNotes>Update to support Windsor 5. NOTE: older versions are no-longer supported.</releaseNotes>
 
-		<dependencies>
-			<dependency id="Castle.Core" version="[4.4.0, 5.0.0)" />
-  	  <dependency id="Castle.Windsor" version="[5.0.0, 6.0.0)" />
-		</dependencies>
-	</metadata>
+        <dependencies>
+            <dependency id="Castle.Core" version="[4.4.0, 5.0.0)" />
+            <dependency id="Castle.Windsor" version="[5.0.0, 6.0.0)" />
+        </dependencies>
+    </metadata>
 
-	<files>
-		<file src="bin\Release\AppConfigFacility.dll" target="lib\net45" />
-		<file src="bin\Release\AppConfigFacility.pdb" target="lib\net45" />
-		<file src="bin\Release\AppConfigFacility.xml" target="lib\net45" />
-    <file src="**\*.cs" exclude="**\obj\*.*" target="src"/>
-	</files>
+    <files>
+        <file src="bin\Release\AppConfigFacility.dll" target="lib\net45" />
+        <file src="bin\Release\AppConfigFacility.pdb" target="lib\net45" />
+        <file src="bin\Release\AppConfigFacility.xml" target="lib\net45" />
+        <file src="**\*.cs" exclude="**\obj\*.*" target="src"/>
+    </files>
 </package>
