@@ -1,8 +1,0 @@
-language: csharp
-
-solution: AppConfigFacility.sln
-install:
-  - sudo apt-get install nunit-console
-  - export EnableNuGetPackageRestore=true
-script:
-  - msbuild build.proj
