@@ -8,18 +8,23 @@
         <language>en</language>
         <projectUrl>https://github.com/adamconnelly/WindsorAppConfigFacility</projectUrl>
         <license type="expression">MIT</license>
-        <releaseNotes>Update to support Windsor 5. NOTE: older versions are no-longer supported.</releaseNotes>
+        <releaseNotes>
+            Update target framework from 4.5 to 4.6.2
+            Update to support Windsor 6.
+            Update dependencies
+            NOTE: older versions are no-longer supported
+        </releaseNotes>
 
         <dependencies>
-            <dependency id="Castle.Core" version="[4.4.0, 5.0.0)" />
-            <dependency id="Castle.Windsor" version="[5.0.0, 6.0.0)" />
+            <dependency id="Castle.Core" version="[5.1.2, 6.0.0)" />
+            <dependency id="Castle.Windsor" version="[6.0.0, 7.0.0)" />
         </dependencies>
     </metadata>
 
     <files>
-        <file src="bin\Release\AppConfigFacility.dll" target="lib\net45" />
-        <file src="bin\Release\AppConfigFacility.pdb" target="lib\net45" />
-        <file src="bin\Release\AppConfigFacility.xml" target="lib\net45" />
+        <file src="bin\Release\AppConfigFacility.dll" target="lib\net462" />
+        <file src="bin\Release\AppConfigFacility.pdb" target="lib\net462" />
+        <file src="bin\Release\AppConfigFacility.xml" target="lib\net462" />
         <file src="**\*.cs" exclude="**\obj\*.*" target="src"/>
     </files>
 </package>
