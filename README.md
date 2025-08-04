@@ -1,9 +1,14 @@
 # Windsor App Config Facility
+
 A Windsor facility for automatically implementing interfaces to access application settings.
 
 [![Build Status](https://dev.azure.com/adamrpconnelly/WindsorAppConfigFacility/_apis/build/status/adamconnelly.WindsorAppConfigFacility?branchName=master)](https://dev.azure.com/adamrpconnelly/WindsorAppConfigFacility/_build/latest?definitionId=2&branchName=master)
 
 License: [MIT](http://www.opensource.org/licenses/mit-license.php)
+
+## Project Status
+
+This project is no-longer actively maintained. Please do not use it for any future projects.
 
 ### NuGet: [WindsorAppConfigFacility](https://www.nuget.org/packages/WindsorAppConfigFacility)
 
